@@ -9,11 +9,17 @@ Aplikácia patrí k rodine **Sidur Hineni**. Pripravil Peter Mičuda.
 - **Android aplikácia** – hlavná verzia. Zostavuje sa v súkromnom repozitári sidur-hineni (priečinok `citanie/`), testovacie APK sa posiela testerom priamo.
 - **Webová verzia** – tento repozitár (GitHub Pages). Je pre tých, ktorí nemajú Android (napr. iPhone) alebo chcú len rýchlo otvoriť odkaz. Obsah je rovnaký ako v aplikácii.
 
+## Ako upraviť
+
+- Texty: `src/obsah.html` (sekcie `<h2 id="s0">` … `s27`), vzhľad a správanie: `src/sablona.html`, `src/app.css`, `src/app.js`.
+- Zostavenie: `python3 zostav.py` → `index.html` (33 strán).
+- Android verzia: `index.html` a `frank-ruhl.woff` skopírovať do `citanie/www/` v repozitári sidur-hineni.
+
 ## Čo vie
 
-- Úvodná obrazovka s tlačidlom Pokračovať – vráti vás tam, kde ste skončili.
-- Výslovnosť pod každým slovom; dá sa skryť (ikona oka) a ťuknutím na riadok ukázať.
-- Obsah, veľkosť písma, nočný režim, O aplikácii.
+- Čítanie po stranách (33 strán) ako v sidure: listovanie tlačidlami alebo prstom, „Na ktorú časť?“.
+- Výslovnosť pod každým slovom; ikonou oka sa skryje, ťuknutím na slovo (alebo číslo riadku) sa ukáže.
+- Pokračovanie tam, kde ste skončili (strana a riadok), obsah, 6 veľkostí písma, nočný režim.
 - Funguje aj bez internetu.
 
 Chyby v texte alebo vo výslovnosti: sidur.hineni@gmail.com

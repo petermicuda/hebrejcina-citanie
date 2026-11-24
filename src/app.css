@@ -1,0 +1,184 @@
+@font-face{font-family:"FR";src:url(frank-ruhl.woff) format("woff");font-display:block}
+:root{--bg:#F6F3EE;--ink:#1F1B16;--mut:#6B6259;--line:#E8E1D6;--tr:#7A5C22;--card:#FFFDF9;--acc:#C8A464;--pill:#F1E3C4;--goldInk:#241C10;--tint:#FBF4E4;--prepOff:#CFC4B3;--dash:#E2D9CA;
+  --shadow:0 1px 2px rgba(36,28,16,.06),0 8px 24px rgba(36,28,16,.06);
+  --fhe:34px;--fpr:15px;--ftx:16px;
+  --sat:var(--safe-area-inset-top,env(safe-area-inset-top,0px));--sab:var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px))}
+@media (prefers-color-scheme:dark){:root:not(.light){--bg:#16130F;--ink:#EDE4D3;--mut:#B8A894;--line:#2F2921;--tr:#D9B46A;--card:#1F1B16;--acc:#C8A464;--pill:#3A3022;--goldInk:#1A140A;--tint:#2A2318;--prepOff:#4A4033;--dash:#4A4033;--shadow:none}}
+:root.dark{--bg:#16130F;--ink:#EDE4D3;--mut:#B8A894;--line:#2F2921;--tr:#D9B46A;--card:#1F1B16;--acc:#C8A464;--pill:#3A3022;--goldInk:#1A140A;--tint:#2A2318;--prepOff:#4A4033;--dash:#4A4033;--shadow:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:var(--ftx);line-height:1.5;overflow:hidden}
+button{font:inherit;color:inherit}
+p{margin:.5em 0}
+
+/* ---------- kostra ako v sidure ---------- */
+.app{max-width:640px;height:100vh;height:100dvh;margin:0 auto;display:flex;flex-direction:column}
+.bar{flex:0 0 auto;display:flex;align-items:center;gap:4px;padding:8px 8px 6px;padding-top:calc(8px + var(--sat))}
+.ib{width:44px;height:44px;flex:0 0 44px;border:0;border-radius:22px;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.ib[aria-pressed="true"],.ib[aria-expanded="true"]{background:var(--pill)}
+.ib .okoZ{display:none}.ib[aria-pressed="true"] .oko{display:none}.ib[aria-pressed="true"] .okoZ{display:block}
+.aa{font-size:17px;font-weight:700;letter-spacing:-.5px}
+.tit{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;align-items:center;line-height:1.15}
+.tit b{max-width:100%;font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tit span{font-family:"FR",serif;font-size:15px;color:var(--tr)}
+.tit span:empty{display:none}
+.scroll{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 12px 16px;outline:none}
+.paper{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:22px 20px 20px;min-height:100%}
+.paper[hidden]{display:none}
+.paper.vstup{animation:vstupL .22s ease-out}.paper.vstupP{animation:vstupP .22s ease-out}
+@keyframes vstupL{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+@keyframes vstupP{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.paper.vstup,.paper.vstupP{animation:none}}
+
+/* ---------- otvorenie strany ---------- */
+.otv .eb{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.otv .sek{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut)}
+.otv .cis{flex:none;font-size:13px;font-weight:700;color:var(--goldInk);background:var(--pill);border-radius:12px;min-width:34px;height:26px;display:flex;align-items:center;justify-content:center;padding:0 9px}
+:root.dark .otv .cis{color:var(--tr)}
+@media (prefers-color-scheme:dark){:root:not(.light) .otv .cis{color:var(--tr)}}
+.otv .velke{font-family:"FR",serif;font-size:56px;line-height:1.25;color:var(--tr);text-align:center;direction:rtl;margin:16px 0 0;word-spacing:18px}
+.otv .naz{text-align:center;font-size:20px;font-weight:700;margin:14px 0 0;text-wrap:balance;line-height:1.3}
+.otv .velke+.naz{font-size:17px;margin-top:6px}
+.otv .naz small{display:block;font-weight:400;color:var(--mut);font-size:14px;margin-top:4px;line-height:1.45}
+.otv .naz small .he{font-size:1.3em;line-height:1;vertical-align:-.1em;color:var(--ink)}
+.orn{display:flex;align-items:center;justify-content:center;gap:10px;margin:18px 0 4px;color:var(--acc);font-size:14px}
+.orn i{display:block;height:1px;width:56px;background:var(--line)}
+
+/* ---------- text strany ---------- */
+.telo h3{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:24px 0 8px}
+.telo ul{padding-left:1.2em;margin:.4em 0} .telo li{margin:.45em 0;line-height:1.65}
+.he{unicode-bidi:isolate;font-family:"FR","Frank Ruhl Libre","Times New Roman",serif;font-weight:400;font-size:1.5em;line-height:1;vertical-align:-.08em}
+.telo li li .he,.telo p .he{font-size:1.5em}
+strong .he{font-weight:400}
+.telo p{line-height:1.65}
+.row{border-top:1px solid var(--line);padding:6px 0 12px;user-select:none;-webkit-user-select:none}
+.row .num{display:block;width:max-content;margin:0 0 0 auto;min-width:32px;min-height:28px;padding:2px 2px 2px 10px;border:0;background:none;text-align:right;font-size:12px;font-weight:700;color:var(--mut);cursor:pointer}
+.line{display:flex;flex-wrap:wrap;gap:4px 10px;justify-content:flex-start}
+.w{display:inline-flex;flex-direction:column;align-items:center;min-width:1.8em;padding:2px 6px 4px;border-radius:12px;cursor:pointer;transition:background .15s}
+.w b{font-family:"FR","Frank Ruhl Libre","Times New Roman",serif;font-weight:400;font-size:var(--fhe);line-height:1.4}
+.w i{position:relative;font-style:normal;font-size:var(--fpr);font-weight:500;color:var(--tr);direction:ltr;unicode-bidi:isolate;margin-top:-1px;white-space:nowrap;min-height:1.4em;min-width:18px;text-align:center}
+.sep{font-size:calc(var(--fhe) * .9);color:var(--mut);align-self:flex-start;line-height:1.5}
+/* skrytá výslovnosť: pomlčka namiesto prepisu; ťuknuté slovo sa prepne */
+.w.skr i,.odp.skr{color:transparent}
+.w.skr i::after{content:"";position:absolute;left:50%;top:55%;width:18px;margin-left:-9px;height:2px;border-radius:1px;background:var(--dash)}
+.w.ukaz{background:var(--tint)}
+.odp{display:inline-block;margin-top:4px;padding:2px 8px;border-radius:10px;color:var(--tr);font-weight:500;cursor:pointer;position:relative;min-width:60px;min-height:1.6em}
+.odp.skr::after{content:"ťukni pre riešenie";position:absolute;left:8px;top:2px;color:var(--mut);font-weight:400;font-size:.85em;white-space:nowrap}
+.odp.ukaz{background:var(--tint)}
+.telo p:has(>.odp){line-height:1.9}
+/* otázky */
+.qa{border:1px solid var(--line);border-radius:16px;background:var(--card);margin:.6em 0}
+.qa summary{list-style:none;display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 14px;font-weight:600;cursor:pointer}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"";flex:none;margin-left:auto;width:9px;height:9px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s}
+.qa[open] summary::after{transform:rotate(-135deg) translate(-2px,-2px)}
+.qa .ans{border-top:1px solid var(--line);padding:10px 14px 12px;line-height:1.65}
+.qa summary .he{font-size:1.6em}
+/* koniec strany */
+.koniec{margin:30px 0 2px;padding-top:18px;border-top:1px solid var(--line);text-align:center}
+.koniec .k1{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut)}
+.dalsia{width:100%;display:flex;align-items:center;gap:14px;text-align:left;margin:16px 0 0;padding:14px 14px 14px 16px;border-radius:20px;background:var(--tint);border:1px solid var(--pill);color:var(--ink);cursor:pointer}
+.dalsia .t{flex:1;min-width:0}
+.dalsia .e{display:block;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--tr)}
+.dalsia b{display:block;font-size:17px;margin-top:2px}
+.dalsia small{display:block;color:var(--mut);font-size:13px;margin-top:2px;line-height:1.45}
+.dalsia small .he{font-size:1.3em;line-height:1;vertical-align:-.1em;color:var(--ink)}
+.dalsia .ch{flex:0 0 44px;height:44px;border-radius:22px;background:var(--acc);color:var(--goldInk);display:flex;align-items:center;justify-content:center}
+.sekL{display:flex;justify-content:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sekL button{font-size:14px;font-weight:600;min-height:44px;padding:0 16px;border-radius:22px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.hotovo{margin:16px 0 0;font-size:15px;line-height:1.5}
+
+/* ---------- spodná lišta ---------- */
+.dole{flex:0 0 auto;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:10px;padding:10px 14px calc(12px + var(--sab));background:var(--bg)}
+.navb{height:56px;min-width:56px;border-radius:28px;border:1px solid var(--line);background:var(--card);color:var(--ink);display:flex;align-items:center;justify-content:center;gap:6px;font-size:15px;font-weight:700;padding:0 16px;cursor:pointer}
+.navb.sp{justify-self:start}.navb.da{justify-self:end;background:var(--acc);border-color:var(--acc);color:var(--goldInk)}
+.navb:disabled{visibility:hidden}
+.navb span:empty{display:none}
+.stB{min-width:128px;max-width:100%;height:56px;border:0;border-radius:20px;background:transparent;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;cursor:pointer;padding:0 6px}
+.stB b{font-size:16px;font-weight:700;white-space:nowrap}
+.stB span{font-size:12px;color:var(--mut);white-space:nowrap}
+
+/* ---------- okná (zdola) ---------- */
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(20,16,10,.45);display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.panel,.obBox{background:var(--card);color:var(--ink);width:100%;max-width:560px;border-radius:24px 24px 0 0;padding:8px 20px calc(20px + var(--sab));max-height:88%;overflow:auto;outline:none}
+.panel h2{font-size:18px;margin:12px 0 6px}
+.panel h3{font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:18px 0 4px}
+.panel p{line-height:1.6;font-size:15px}
+.panel a{color:var(--tr);font-weight:600;overflow-wrap:anywhere}
+.uchop{width:40px;height:4px;border-radius:2px;background:var(--line);margin:4px auto 0}
+.infoZ{display:block;width:100%;margin-top:16px;font-weight:700;min-height:50px;border-radius:16px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.riadok{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px;border-bottom:1px solid var(--line);font-size:16px}
+.riadokBtn{width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:0;cursor:pointer;text-align:left}
+.riadokBtn small{display:block;font-size:13px;color:var(--mut)}
+.riadokBtn>svg{color:var(--mut)}
+.dvoj{display:flex;align-items:center;gap:6px}
+.dvoj output{min-width:22px;text-align:center;font-weight:700}
+.kruh{width:44px;height:44px;border-radius:22px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-weight:700;cursor:pointer}
+.kruh:disabled{opacity:.35}
+.ukazka{display:flex;justify-content:center;padding:10px 0 12px;border-bottom:1px solid var(--line)}
+.prepinac{flex:none;width:52px;height:32px;border-radius:16px;background:var(--prepOff);position:relative;transition:background .2s}
+.prepinac i{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:13px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.prepinac[aria-checked="true"]{background:var(--acc)}.prepinac[aria-checked="true"] i{left:23px}
+/* obsah */
+.obBox{height:calc(100% - 40px - var(--sat));max-height:none;display:flex;flex-direction:column;padding:8px 0 0;overflow:hidden}
+.obHl{display:flex;align-items:center;justify-content:space-between;padding:2px 8px 6px 20px;border-bottom:1px solid var(--line)}
+.obHl.bez{border:0;padding:2px 0 0}
+.obHl h2{margin:6px 0;font-size:18px}
+.obScroll{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;padding:4px 0 calc(24px + var(--sab))}
+.obSk{padding:0 16px}
+.obSkN{display:flex;align-items:baseline;justify-content:space-between;margin:18px 4px 6px;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut)}
+.obSkN span{text-transform:none;letter-spacing:0;font-weight:500;font-size:12px}
+.obPol{display:flex;align-items:center;gap:12px;padding:10px 8px;color:var(--ink);text-decoration:none;min-height:56px;border-top:1px solid var(--line)}
+.obSkN+.obPol{border-top:0}
+.obPol.akt{background:var(--pill);border-radius:12px;border-top-color:transparent}
+.obPol.akt+.obPol{border-top-color:transparent}
+.obC{flex:0 0 30px;height:30px;border-radius:15px;background:var(--bg);color:var(--tr);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.obC:empty{background:none}
+.obC:empty::before{content:"";width:6px;height:6px;border-radius:3px;background:var(--acc)}
+.obPol.akt .obC{background:var(--card)}
+.obT{display:flex;flex-direction:column;min-width:0;line-height:1.35}
+.obT b{font-weight:600;font-size:16px}
+.obT small{color:var(--mut);font-size:13.5px;margin-top:2px}
+.obT small .he{font-size:1.3em;vertical-align:-.1em;line-height:1}
+/* mriežka */
+.pod{font-size:14px;color:var(--mut);margin:2px 0 10px}
+.chips{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.chips .oz{grid-column:1/-1;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--mut);margin:12px 2px 0;display:flex;justify-content:space-between}
+.chips .oz span{text-transform:none;letter-spacing:0;font-weight:500;font-size:12px}
+.chip{height:52px;border-radius:16px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:17px;font-weight:700;cursor:pointer;padding:0 4px}
+.chip.w2{grid-column:span 2;font-size:14px}
+.chip.akt{background:var(--acc);border-color:var(--acc);color:var(--goldInk)}
+/* prvé spustenie */
+.kroky{list-style:none;padding:0;margin:8px 0 4px}
+.kroky li{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line);line-height:1.55}
+.kroky li:last-child{border:0}
+.kc{flex:0 0 30px;height:30px;border-radius:15px;background:var(--pill);color:var(--goldInk);font-weight:700;display:flex;align-items:center;justify-content:center}
+:root.dark .kc{color:var(--tr)}
+.ikonka{display:inline-flex;vertical-align:-4px;width:28px;height:28px;border-radius:14px;background:var(--pill);align-items:center;justify-content:center}
+.plny{width:100%;margin-top:14px}
+/* hlásenie */
+.toast{position:fixed;left:50%;bottom:calc(92px + var(--sab));transform:translateX(-50%);z-index:25;background:var(--ink);color:var(--bg);font-size:14px;line-height:1.4;padding:10px 16px;border-radius:14px;width:max-content;max-width:min(320px,calc(100% - 40px));text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.toast[hidden]{display:none}
+
+/* ---------- úvodná obrazovka ---------- */
+.uvod{position:fixed;inset:0;z-index:30;background:var(--bg);display:flex;padding:calc(12px + var(--sat)) 12px calc(12px + var(--sab))}
+.uvod[hidden]{display:none}
+.uvPanel{flex:1;max-width:560px;margin:0 auto;background:#1D2B45;border-radius:22px;color:#F4EFE6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 24px;position:relative;overflow:hidden}
+.uvPanel::before{content:"";position:absolute;inset:9px;border:1px solid rgba(201,165,90,.35);border-radius:15px;pointer-events:none}
+.uvPanel::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 12%,rgba(201,165,90,.22),rgba(201,165,90,0) 55%);pointer-events:none}
+.uvAlef{display:block;height:118px;width:auto;color:#E9D6A8;margin-top:auto}
+.uvT{font-size:15px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#E9D6A8;margin:22px 0 0}
+.uvS{font-size:15px;color:rgba(244,239,230,.78);margin:6px 0 0}
+.uvL{width:44px;height:1px;background:rgba(201,165,90,.6);margin:22px auto}
+.uvHe{font-family:"FR","Frank Ruhl Libre",serif;font-size:30px;color:#C9A55A;margin:0;line-height:1.4}
+.uvP{font-size:13px;line-height:1.5;color:rgba(244,239,230,.62);margin:10px 0 0;max-width:260px;text-wrap:balance}
+.uvB{margin-top:auto;width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.uvBtn{font-weight:700;font-size:16px;min-height:56px;border-radius:18px;border:1px solid rgba(201,165,90,.45);background:transparent;color:#F4EFE6;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 16px}
+.uvHl{background:#C9A55A;border-color:#C9A55A;color:#1D2B45}
+.uvBtn small{font-size:13px;font-weight:600;color:rgba(29,43,69,.85);margin-top:2px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uvBtn small:empty{display:none}
+html.klav :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.telo .par{margin:20px 0 2px;font-size:14px;font-weight:600;color:var(--mut)}
+.telo .par .he{font-size:1.45em;color:var(--ink)}
