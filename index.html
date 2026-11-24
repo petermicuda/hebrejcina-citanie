@@ -1,7 +1,7 @@
-<!DOCTYPE html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#fbf8f2" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#16140f" media="(prefers-color-scheme: dark)"><title>Hebrejčina – čítanie</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><style>@font-face{font-family:"FR";src:url(frank-ruhl.woff) format("woff");font-display:block}
-:root{--bg:#fbf8f2;--ink:#1d1b18;--mut:#6b655c;--line:#e3dccf;--tr:#8a4b12;--card:#fff;--btn:#fff;--btnink:#1d1b18;--acc:#1d1b18}
-@media (prefers-color-scheme:dark){:root:not(.light){--bg:#16140f;--ink:#efe9dd;--mut:#a59d8f;--line:#38332a;--tr:#f0b46a;--card:#211e17;--btn:#2a261e;--btnink:#efe9dd;--acc:#efe9dd}}
-:root.dark{--bg:#16140f;--ink:#efe9dd;--mut:#a59d8f;--line:#38332a;--tr:#f0b46a;--card:#211e17;--btn:#2a261e;--btnink:#efe9dd;--acc:#efe9dd}
+<!DOCTYPE html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#F6F3EE" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#16130F" media="(prefers-color-scheme: dark)"><title>Hebrejčina – čítanie</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><style>@font-face{font-family:"FR";src:url(frank-ruhl.woff) format("woff");font-display:block}
+:root{--bg:#F6F3EE;--ink:#1F1B16;--mut:#6B6259;--line:#E8E1D6;--tr:#7A5C22;--card:#FFFDF9;--btn:#FFFDF9;--btnink:#1F1B16;--acc:#C8A464;--pill:#F1E3C4}
+@media (prefers-color-scheme:dark){:root:not(.light){--bg:#16130F;--ink:#EDE4D3;--mut:#B8A894;--line:#2F2921;--tr:#D9B46A;--card:#1F1B16;--btn:#1F1B16;--btnink:#EDE4D3;--acc:#C8A464;--pill:#3A3022}}
+:root.dark{--bg:#16130F;--ink:#EDE4D3;--mut:#B8A894;--line:#2F2921;--tr:#D9B46A;--card:#1F1B16;--btn:#1F1B16;--btnink:#EDE4D3;--acc:#C8A464;--pill:#3A3022}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:17px;line-height:1.5}
@@ -9,6 +9,13 @@ main{max-width:760px;margin:0 auto;padding:12px 16px 80px}
 h1{font-size:1.55rem;margin:.4em 0 .2em}
 .sub,.hint,.foot{color:var(--mut);font-size:.92rem;margin:.3em 0}
 .foot{margin-top:3em;border-top:1px solid var(--line);padding-top:.8em}
+.info{position:fixed;inset:0;z-index:20;background:rgba(20,16,10,.45);display:flex;align-items:flex-end;justify-content:center}
+.info[hidden]{display:none}
+.infoBox{background:var(--card);color:var(--ink);width:100%;max-width:560px;border-radius:20px 20px 0 0;padding:6px 22px calc(20px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)));max-height:85vh;overflow:auto}
+.infoBox h2{border-bottom:0;margin:.8em 0 .3em}
+.infoBox p{line-height:1.6;font-size:.95rem}
+.infoBox a{color:var(--tr);font-weight:600;overflow-wrap:anywhere}
+.infoZ{display:block;width:100%;margin-top:16px;font:inherit;font-weight:700;padding:12px;border-radius:16px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
 h2{font-size:1.2rem;margin:2em 0 .5em;padding-bottom:.25em;border-bottom:2px solid var(--acc);scroll-margin-top:64px}
 h3{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:1.4em 0 .3em}
 ul{padding-left:1.2em} li{margin:.35em 0}
@@ -27,19 +34,54 @@ strong .he{font-weight:400}
 .pr{color:var(--mut);font-size:.85rem;margin-top:4px}
 body.hide .w i,body.hide .pr{visibility:hidden}
 body.hide .row.show .w i,body.hide .row.show .pr{visibility:visible}
-.qa{border:1px solid var(--line);border-radius:8px;background:var(--card);margin:.5em 0;padding:.55em .8em}
+.qa{border:1px solid var(--line);border-radius:12px;background:var(--card);margin:.5em 0;padding:.55em .8em}
 .qa summary{font-weight:600;cursor:pointer}
 .qa .ans{margin-top:.4em}
-.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:8px 12px;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.bar button{font:inherit;font-size:.92rem;font-weight:600;color:var(--btnink);-webkit-text-fill-color:var(--btnink);padding:7px 12px;border:1px solid var(--btnink);background:var(--btn);border-radius:8px;cursor:pointer;min-width:44px;min-height:40px}
 nav{position:sticky;top:57px;z-index:4;background:var(--card);border-bottom:1px solid var(--line);max-height:60vh;overflow:auto}
 nav ol{margin:0;padding:8px 16px 12px 36px;max-width:760px;margin:0 auto}
 nav a{color:var(--ink);text-decoration:none;display:block;padding:5px 0}
-@media (max-width:520px){body{font-size:16px}.bar button{padding:6px 9px}}
+@media (max-width:520px){body{font-size:16px}}
 h2 .he{font-size:1.25em;vertical-align:-0.05em;line-height:1.2}
 h2{line-height:1.5}
 .qa summary .he{font-size:calc(2em * var(--f,1))}
-</style></head><body><header class="bar"><button id="toc" type="button">Obsah</button><button id="t" type="button">Skryť výslovnosť</button><button id="m" type="button" aria-label="Menšie písmo">A−</button><button id="p" type="button" aria-label="Väčšie písmo">A+</button><button id="dk" type="button" aria-label="Nočný režim">☾</button></header><nav id="nav" hidden><ol><li><a href="#s0">Lekcia 1: א alef, ב bet · samohlásky אָ kamac, אַ patach</a></li><li><a href="#s1">Lekcia 2: מ mem, י jud · samohlásky אִ chirik, אֵ cere</a></li><li><a href="#s2">Lekcia 3: נ nun, ה he</a></li><li><a href="#s3">Lekcia 4: ל lamed, ו vav · samohlásky אְ ševa, אֶ segol</a></li><li><a href="#s4">Lekcia 5: ר reš, ש šin/sin · samohláska וֹ cholam male</a></li><li><a href="#s5">Lekcia 6: ע ajin, ט tet · samohláska וּ šuruk</a></li><li><a href="#s6">Lekcia 7: ת tav, ד dalet · samohlásky אֱ chataf segol, אֹ cholam</a></li><li><a href="#s7">Lekcia 8: צ cadi, ק kof · samohláska אֲ chataf patach</a></li><li><a href="#s8">Lekcia 9: ח chet, כ kaf · samohláska אֻ kubuc</a></li><li><a href="#s9">Lekcia 10: ז zajin, פ pe · samohláska אֳ chataf kamac</a></li><li><a href="#s10">Lekcia 11: ג gimel, ס samech</a></li><li><a href="#s11">Koncové písmená, dageš, podobné písmená</a></li><li><a href="#s12">Úvod – opakovanie (strana 3)</a></li><li><a href="#s13">Koncové písmená a dageš (strana 4)</a></li><li><a href="#s14">Podobne znejúce a podobne vyzerajúce písmená (strana 5)</a></li><li><a href="#s15">Pravidlá čítania</a></li><li><a href="#s16">Amida – čítanie po častiach</a></li><li><a href="#s17">Big Practice – strana 8: slová a frázy z Amidy</a></li><li><a href="#s18">Big Practice – strana 11: prvý riadok Amidy a frázy</a></li><li><a href="#s19">Big Practice – strana 14: slová a frázy</a></li><li><a href="#s20">Big Practice – strana 17: Gevurot (2. požehnanie Amidy) – slová a frázy</a></li><li><a href="#s21">Big Practice – strana 20: Keduša (3. požehnanie Amidy) – slová a frázy</a></li><li><a href="#s22">Big Practice – strana 23: slová a frázy zo šabatovej Amidy (Vajechulu, Ve‑šamru, Recé)</a></li><li><a href="#s23">Big Practice – strana 26: slová a frázy z Modim (požehnanie vďaky v Amide)</a></li><li><a href="#s24">Big Practice – strana 29: slová a frázy zo Sim šalom / Šalom rav</a></li><li><a href="#s25">Final Big Practice – strana 32: frázy z Amidy</a></li><li><a href="#s26">Celá abeceda</a></li><li><a href="#s27">Samohlásky</a></li></ol></nav><main><h1>Hebrejčina – čítanie</h1><p class="sub">Spracované podľa materiálov z hodín hebrejčiny (lekcie 1–11 a tabuľka abecedy). Pri čítaní si zakry riadok so šípkou, prečítaj nahlas a potom si to skontroluj. Kľúč je v jednoduchom prepise latinkou (ch, š, c, j).</p><p class="hint">Keď je výslovnosť skrytá, ťukni na riadok a ukáže sa. Otázku otvoríš ťuknutím.</p><h2 id="s0">Lekcia 1: <span class="he" lang="he">א</span> alef, <span class="he" lang="he">ב</span> bet · samohlásky <span class="he" lang="he">אָ</span> kamac, <span class="he" lang="he">אַ</span> patach</h2>
+
+/* horná lišta v štýle siduru */
+.bar{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:4px;padding:6px 8px;padding-top:calc(6px + var(--safe-area-inset-top,env(safe-area-inset-top,0px)))}
+.ib{width:44px;height:44px;flex:0 0 44px;border:0;border-radius:22px;background:transparent;color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;-webkit-tap-highlight-color:transparent}
+.ib[aria-pressed="true"],.ib[aria-expanded="true"]{background:var(--pill)}
+.ib .okoZ{display:none}.ib[aria-pressed="true"] .oko{display:none}.ib[aria-pressed="true"] .okoZ{display:block}
+.aa{font-size:17px;font-weight:700;letter-spacing:-.5px}
+.tit{flex:1 1 auto;min-width:0;text-align:center}
+.tit b{display:block;font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+nav{top:calc(57px + var(--safe-area-inset-top,env(safe-area-inset-top,0px)))}
+/* nastavenie */
+.uchop{width:40px;height:4px;border-radius:2px;background:var(--line);margin:8px auto 0}
+.riadok{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;border-bottom:1px solid var(--line);font-size:1rem}
+.riadokBtn{width:100%;font:inherit;color:var(--ink);background:none;border:0;border-bottom:1px solid var(--line);padding:0;cursor:pointer;text-align:left}
+.riadokBtn svg{color:var(--mut)}
+.dvoj{display:flex;gap:8px}
+.kruh{width:48px;height:40px;border-radius:20px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.prepinac{width:52px;height:32px;border-radius:16px;border:0;background:var(--line);position:relative;cursor:pointer;padding:0;transition:background .2s}
+.prepinac i{position:absolute;top:3px;left:3px;width:26px;height:26px;border-radius:13px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:left .2s}
+.prepinac[aria-checked="true"]{background:var(--acc)}.prepinac[aria-checked="true"] i{left:23px}
+/* úvodná obrazovka */
+.uvod{position:fixed;inset:0;z-index:30;background:var(--bg);display:flex;padding:calc(12px + var(--safe-area-inset-top,env(safe-area-inset-top,0px))) 12px calc(12px + var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)))}
+.uvod[hidden]{display:none}
+.uvPanel{flex:1;background:#1D2B45;border-radius:22px;color:#F4EFE6;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 24px;position:relative;overflow:hidden}
+.uvPanel::before{content:"";position:absolute;inset:9px;border:1px solid rgba(201,165,90,.35);border-radius:15px;pointer-events:none}
+.uvPanel::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 12%,rgba(201,165,90,.22),rgba(201,165,90,0) 55%);pointer-events:none}
+.uvAlef{display:block;height:118px;width:auto;color:#E9D6A8;margin-top:auto}
+.uvT{font-size:15px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:#E9D6A8;margin:22px 0 0;border:0;padding:0}
+.uvS{font-size:15px;color:rgba(244,239,230,.78);margin:6px 0 0}
+.uvL{width:44px;height:1px;background:rgba(201,165,90,.6);margin:22px auto}
+.uvHe{font-family:"FR","Frank Ruhl Libre",serif;font-size:30px;color:#C9A55A;margin:0;line-height:1.4}
+.uvP{font-size:13px;line-height:1.5;color:rgba(244,239,230,.62);margin:10px 0 0;max-width:260px;text-wrap:balance}
+.uvB{margin-top:auto;width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.uvBtn{font:inherit;font-weight:700;font-size:16px;min-height:54px;border-radius:18px;border:1px solid rgba(201,165,90,.45);background:transparent;color:#F4EFE6;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 16px}
+.uvHl{background:#C9A55A;border-color:#C9A55A;color:#1D2B45}
+.uvBtn small{font-size:12.5px;font-weight:500;opacity:.8;margin-top:2px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uvBtn small:empty{display:none}
+</style></head><body><header class="bar"><button id="toc" class="ib" type="button" aria-label="Obsah" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg></button><div class="tit"><b id="titL">Hebrejčina – čítanie</b></div><button id="t" class="ib" type="button" aria-label="Skryť výslovnosť" aria-pressed="false"><svg class="oko" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.06 12.35a1 1 0 0 1 0-.7 10.75 10.75 0 0 1 19.88 0 1 1 0 0 1 0 .7 10.75 10.75 0 0 1-19.88 0"/><circle cx="12" cy="12" r="3"/></svg><svg class="okoZ" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c4.64 0 8.4 2.8 9.94 6.65a1 1 0 0 1 0 .7 10.8 10.8 0 0 1-1.44 2.49"/><path d="M14.08 14.16a3 3 0 0 1-4.24-4.24"/><path d="M17.48 17.5A10.75 10.75 0 0 1 2.06 12.35a1 1 0 0 1 0-.7 10.8 10.8 0 0 1 4.45-5.14"/><path d="m2 2 20 20"/></svg></button><button id="nastB" class="ib" type="button" aria-label="Nastavenie"><span class="aa">Aa</span></button></header><nav id="nav" hidden><ol><li><a href="#s0">Lekcia 1: א alef, ב bet · samohlásky אָ kamac, אַ patach</a></li><li><a href="#s1">Lekcia 2: מ mem, י jud · samohlásky אִ chirik, אֵ cere</a></li><li><a href="#s2">Lekcia 3: נ nun, ה he</a></li><li><a href="#s3">Lekcia 4: ל lamed, ו vav · samohlásky אְ ševa, אֶ segol</a></li><li><a href="#s4">Lekcia 5: ר reš, ש šin/sin · samohláska וֹ cholam male</a></li><li><a href="#s5">Lekcia 6: ע ajin, ט tet · samohláska וּ šuruk</a></li><li><a href="#s6">Lekcia 7: ת tav, ד dalet · samohlásky אֱ chataf segol, אֹ cholam</a></li><li><a href="#s7">Lekcia 8: צ cadi, ק kof · samohláska אֲ chataf patach</a></li><li><a href="#s8">Lekcia 9: ח chet, כ kaf · samohláska אֻ kubuc</a></li><li><a href="#s9">Lekcia 10: ז zajin, פ pe · samohláska אֳ chataf kamac</a></li><li><a href="#s10">Lekcia 11: ג gimel, ס samech</a></li><li><a href="#s11">Koncové písmená, dageš, podobné písmená</a></li><li><a href="#s12">Úvod – opakovanie (strana 3)</a></li><li><a href="#s13">Koncové písmená a dageš (strana 4)</a></li><li><a href="#s14">Podobne znejúce a podobne vyzerajúce písmená (strana 5)</a></li><li><a href="#s15">Pravidlá čítania</a></li><li><a href="#s16">Amida – čítanie po častiach</a></li><li><a href="#s17">Big Practice – strana 8: slová a frázy z Amidy</a></li><li><a href="#s18">Big Practice – strana 11: prvý riadok Amidy a frázy</a></li><li><a href="#s19">Big Practice – strana 14: slová a frázy</a></li><li><a href="#s20">Big Practice – strana 17: Gevurot (2. požehnanie Amidy) – slová a frázy</a></li><li><a href="#s21">Big Practice – strana 20: Keduša (3. požehnanie Amidy) – slová a frázy</a></li><li><a href="#s22">Big Practice – strana 23: slová a frázy zo šabatovej Amidy (Vajechulu, Ve‑šamru, Recé)</a></li><li><a href="#s23">Big Practice – strana 26: slová a frázy z Modim (požehnanie vďaky v Amide)</a></li><li><a href="#s24">Big Practice – strana 29: slová a frázy zo Sim šalom / Šalom rav</a></li><li><a href="#s25">Final Big Practice – strana 32: frázy z Amidy</a></li><li><a href="#s26">Celá abeceda</a></li><li><a href="#s27">Samohlásky</a></li></ol></nav><div id="nast" class="info" hidden role="dialog" aria-modal="true" aria-labelledby="nastT"><div class="infoBox"><div class="uchop"></div><h2 id="nastT">Nastavenie</h2><div class="riadok"><span>Veľkosť písma</span><span class="dvoj"><button id="m" type="button" class="kruh" aria-label="Menšie písmo">A−</button><button id="p" type="button" class="kruh" aria-label="Väčšie písmo">A+</button></span></div><div class="riadok"><span>Nočný režim</span><button id="dk" type="button" class="prepinac" role="switch" aria-checked="false" aria-label="Nočný režim"><i></i></button></div><button type="button" id="oApp" class="riadok riadokBtn"><span>O aplikácii</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button><button type="button" class="infoZ" data-zavri="nast">Zavrieť</button></div></div><div id="uvod" class="uvod" role="dialog" aria-modal="true" aria-labelledby="uvT"><div class="uvPanel"><svg class="uvAlef" viewBox="35 -597 493 609" aria-hidden="true"><path transform="scale(1 -1)" fill="currentColor" d="M452 -12Q451 -2 445.5 7.5Q440 17 426 32L161 320L144 291Q130 266 127.5 247.5Q125 229 134 214L188 123Q211 84 213.0 53.5Q215 23 202 0H35V33H53Q70 33 71.5 46.5Q73 60 66 95L57 143Q52 170 52.5 191.5Q53 213 63.5 238.5Q74 264 98 303L130 354L84 404Q63 427 60.0 447.0Q57 467 57 478Q58 510 71.5 539.5Q85 569 98 597H117V591Q117 580 124.5 571.5Q132 563 145 548L376 298Q378 306 384 315Q393 330 403 342L422 366L408 368Q365 374 351.5 398.5Q338 423 338 454Q338 503 353.5 540.5Q369 578 377 597H396V584Q396 571 400.0 561.5Q404 552 427 549L476 543Q505 539 516.5 517.0Q528 495 528 457Q528 434 523.5 405.5Q519 377 506 342H497Q495 350 492.0 353.5Q489 357 475 359L455 362L449 352Q434 327 427.0 307.0Q420 287 418 271Q417 262 416 254L466 200Q487 178 498.0 150.5Q509 123 509 94Q509 66 497.5 40.5Q486 15 471 -12Z"/></svg><h1 class="uvT" id="uvT">Hebrejčina</h1><p class="uvS">čítanie s výslovnosťou</p><div class="uvL"></div><p class="uvHe" lang="he" dir="rtl">אָלֶף־בֵּית</p><p class="uvP">Lekcie 1–11, pravidlá čítania, Amida a cvičenia Big Practice</p><div class="uvB"><button type="button" id="uvDalej" class="uvBtn uvHl"><span>Začať čítať</span><small id="uvKde"></small></button><button type="button" id="uvObsah" class="uvBtn">Obsah</button></div></div></div><div id="info" class="info" hidden role="dialog" aria-modal="true" aria-labelledby="infoT"><div class="infoBox"><h2 id="infoT">O aplikácii</h2><p><b>Hebrejčina – čítanie</b>, testovacia verzia 0.1</p><p>Aplikáciu pripravil Peter Mičuda.</p><p>Cvičenia na čítanie hebrejčiny podľa materiálov z hodín: lekcie 1–11, koncové písmená a dageš, pravidlá čítania, Amida a strany Big Practice.</p><h3>Našli ste chybu?</h3><p>Ak niekde nesedí hebrejský text alebo výslovnosť, napíšte nám na <a href="mailto:sidur.hineni@gmail.com?subject=Hebrej%C4%8Dina%20%E2%80%93%20%C4%8D%C3%ADtanie%3A%20chyba">sidur.hineni@gmail.com</a>. Pomôže, keď uvediete lekciu alebo stranu a číslo riadku.</p><button type="button" id="infoZ" class="infoZ">Zavrieť</button></div></div><main><h1>Hebrejčina – čítanie</h1><p class="sub">Spracované podľa materiálov z hodín hebrejčiny (lekcie 1–11 a tabuľka abecedy). Pri čítaní si zakry riadok so šípkou, prečítaj nahlas a potom si to skontroluj. Kľúč je v jednoduchom prepise latinkou (ch, š, c, j).</p><p class="hint">Keď je výslovnosť skrytá, ťukni na riadok a ukáže sa. Otázku otvoríš ťuknutím.</p><h2 id="s0">Lekcia 1: <span class="he" lang="he">א</span> alef, <span class="he" lang="he">ב</span> bet · samohlásky <span class="he" lang="he">אָ</span> kamac, <span class="he" lang="he">אַ</span> patach</h2>
 <h3>Písmená a samohlásky</h3>
 <ul>
 <li><strong><span class="he" lang="he">א</span> alef</strong> = nemé písmeno. Samo sa nečíta, len nesie samohlásku.</li>
@@ -577,11 +619,11 @@ h2{line-height:1.5}
 <li><span class="he" lang="he">אֲ</span> chataf patach – krátke a</li>
 <li><span class="he" lang="he">אֱ</span> chataf segol – krátke e</li>
 <li><span class="he" lang="he">אֳ</span> chataf kamac – krátke o</li>
-</ul><p class="foot">Podľa materiálov z hodín hebrejčiny. Pravidlá čítania sú doplnené.</p></main><script>(function(){
+</ul><p class="foot">Podľa materiálov z hodín hebrejčiny. Pravidlá čítania sú doplnené.</p></main><script>(function(){
 var b=document.body,R=document.documentElement,btn=document.getElementById('t');
 function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
 function set(k,v){try{localStorage.setItem(k,v)}catch(e){}}
-function setH(h){b.classList.toggle('hide',h);btn.textContent=h?'Ukázať výslovnosť':'Skryť výslovnosť';set('hideTr',h?'1':'0')}
+function setH(h){b.classList.toggle('hide',h);btn.setAttribute('aria-pressed',h?'true':'false');btn.setAttribute('aria-label',h?'Ukázať výslovnosť':'Skryť výslovnosť');set('hideTr',h?'1':'0')}
 setH(get('hideTr')==='1');
 btn.onclick=function(){document.querySelectorAll('.row.show').forEach(function(r){r.classList.remove('show')});setH(!b.classList.contains('hide'))};
 document.querySelectorAll('.row').forEach(function(r){r.onclick=function(){r.classList.toggle('show')}});
@@ -593,9 +635,39 @@ document.getElementById('m').onclick=function(){f=Math.max(+(f-0.15).toFixed(2),
 var mq=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)');
 function isDark(){return R.classList.contains('dark')||(!R.classList.contains('light')&&mq&&mq.matches)}
 var th=get('theme');if(th==='dark')R.classList.add('dark');if(th==='light')R.classList.add('light');
-document.getElementById('dk').onclick=function(){var d=!isDark();R.classList.remove('dark','light');R.classList.add(d?'dark':'light');set('theme',d?'dark':'light')};
+var dk=document.getElementById('dk');function dkStav(){dk.setAttribute('aria-checked',isDark()?'true':'false')}dkStav();if(mq&&mq.addEventListener)mq.addEventListener('change',dkStav);
+var CP=(window.Capacitor&&window.Capacitor.Plugins)||{};
+function lista(){try{if(CP.SystemBars)CP.SystemBars.setStyle({style:isDark()?'DARK':'LIGHT'})}catch(e){}}lista();if(mq&&mq.addEventListener)mq.addEventListener('change',lista);
+dk.onclick=function(){var d=!isDark();R.classList.remove('dark','light');R.classList.add(d?'dark':'light');set('theme',d?'dark':'light');dkStav();lista()};
 var nav=document.getElementById('nav');
-document.getElementById('toc').onclick=function(){nav.hidden=!nav.hidden};
-nav.addEventListener('click',function(e){if(e.target.tagName==='A')nav.hidden=true});
+var toc=document.getElementById('toc');function navStav(){toc.setAttribute('aria-expanded',nav.hidden?'false':'true')}
+toc.onclick=function(){nav.hidden=!nav.hidden;navStav()};
+var info=document.getElementById('info');
+function zavriInfo(){info.hidden=true}
+var nast=document.getElementById('nast');
+document.getElementById('nastB').onclick=function(){nav.hidden=true;navStav();nast.hidden=false};
+document.getElementById('oApp').onclick=function(){nast.hidden=true;info.hidden=false};
+document.querySelector('[data-zavri=nast]').onclick=function(){nast.hidden=true};
+nast.addEventListener('click',function(e){if(e.target===nast)nast.hidden=true});
+document.getElementById('infoZ').onclick=zavriInfo;
+info.addEventListener('click',function(e){if(e.target===info)zavriInfo()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!info.hidden)zavriInfo();else if(!nast.hidden)nast.hidden=true;}});
+
+var H=[].slice.call(document.querySelectorAll('main h2[id]')),titL=document.getElementById('titL');
+function kratko(h){var t=h.textContent.replace(/\s+/g,' ').trim();var i=t.indexOf(':');if(i>0&&/^(Lekcia|Big Practice|Final)/.test(t))t=t.slice(0,i);return t.replace('Big Practice – strana','Big Practice · s.').replace('Final Big Practice – strana','Final Big Practice · s.')}
+var akt=null,cakaj=0;
+function zistiAkt(){var y=59,a=null;for(var i=0;i<H.length;i++){if(H[i].getBoundingClientRect().top<=y+4)a=H[i];else break}
+  if(a!==akt){akt=a;titL.textContent=a?kratko(a):'Hebrejčina – čítanie'}}
+window.addEventListener('scroll',function(){if(cakaj)return;cakaj=requestAnimationFrame(function(){cakaj=0;zistiAkt();if(uvod.hidden){set('poz',String(Math.round(scrollY)));set('pozT',akt?kratko(akt):'')}})},{passive:true});
+var uvod=document.getElementById('uvod'),poz=parseInt(get('poz')||'0',10)||0,pozT=get('pozT')||'';
+if(poz>200&&pozT){document.querySelector('#uvDalej span').textContent='Pokračovať';document.getElementById('uvKde').textContent=pozT}
+document.getElementById('uvDalej').onclick=function(){uvod.hidden=true;if(poz>200)scrollTo(0,poz);zistiAkt()};
+document.getElementById('uvObsah').onclick=function(){uvod.hidden=true;nav.hidden=false;navStav()};
+zistiAkt();
+// tlačidlo Späť v Android aplikácii: zavrie otvorené okno, inak skončí
+window.hinSpat=function(){if(!info.hidden){zavriInfo();return true}if(!nast.hidden){nast.hidden=true;return true}if(!nav.hidden){nav.hidden=true;navStav();return true}return false};
+try{if(CP.App&&CP.App.addListener)CP.App.addListener('backButton',function(){if(!window.hinSpat()){try{CP.App.exitApp()}catch(e){}}})}catch(e){}
+try{if(CP.KeepAwake)CP.KeepAwake.keepAwake()}catch(e){}
+nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.hidden=true;navStav()}});
 })();
-;if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js")}</script></body></html>
+;if("serviceWorker" in navigator&&!window.Capacitor&&location.protocol==="https:"){navigator.serviceWorker.register("sw.js")}</script></body></html>
