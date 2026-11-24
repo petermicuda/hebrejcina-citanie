@@ -26,7 +26,7 @@ ART.forEach(function(a,i){
   h='<div class="k1">'+nb(p.kon)+'</div>';
   if(nx)h+='<button type="button" class="dalsia" data-ist="'+(i+1)+'"><span class="t"><span class="e">Ďalej</span><b>'+nb(nx.tit)+'</b><small>'+nx.desc+'</small></span><span class="ch">'+CHEV+'</span></button>';
   else h+='<p class="hotovo">'+nb('Prešiel si celý materiál. K ľubovoľnej časti sa vrátiš cez obsah.')+'</p><div class="sekL"><button type="button" data-obsah>Obsah</button></div>';
-  h+='<div class="sekL"><button type="button" data-precvic>Precvičiť znova bez výslovnosti</button><button type="button" data-chyba>Nahlásiť chybu</button></div>';
+  h+='<div class="sekL"><button type="button" data-precvic>Precvičiť znova bez výslovnosti</button></div>';
   k.innerHTML=h;
   // slová a riadky ako tlačidlá
   [].forEach.call(a.querySelectorAll('.row'),function(r){
@@ -69,7 +69,7 @@ function ukaz(i,smer,riadok){
   var a=ART[i];a.hidden=false;a.classList.remove('vstup','vstupP');
   if(smer){void a.offsetWidth;a.classList.add(smer>0?'vstup':'vstupP')}
   cur=i;
-  $('titL').textContent=p.ser==='l'?p.tit:p.ser==='bp'?'Big Practice':p.ser==='am'?'Amida':p.tit;
+  $('titL').textContent=p.ser==='l'?p.tit:p.ser==='cc'?'Cvičné čítanie':p.ser==='op'?'Opakovanie':p.ser==='am'?'Amida':p.tit;
   $('titHe').textContent=p.he||'';
   $('nStT').textContent=p.kr;$('nStS').textContent=(i+1)+' z '+N+' · prejsť';
   var sp=$('nSp'),da=$('nDa');
@@ -135,12 +135,12 @@ D.addEventListener('click',function(e){
 function otvorObsah(){otvor('nav');[].forEach.call($('nav').querySelectorAll('.obPol'),function(x){var on=cur>=0&&x.getAttribute('data-p')===P[cur].id;x.classList.toggle('akt',on);if(on){x.setAttribute('aria-current','true');setTimeout(function(){x.scrollIntoView({block:'center'})},0)}else x.removeAttribute('aria-current')})}
 $('toc').onclick=function(){if($('nav').hidden)otvorObsah();else zavriVsetko()};
 $('nav').addEventListener('click',function(e){var a=e.target.closest('.obPol');if(a){e.preventDefault();chod(IDX[a.getAttribute('data-p')])}});
-$('nSt').onclick=function(){otvor('mriezka');var id=cur>=0?P[cur].id:'';[].forEach.call($('mriezka').querySelectorAll('.chip'),function(c){var p=c.getAttribute('data-p');c.classList.toggle('akt',p===id||(p==='s5a'&&id==='s5b'))})};
+$('nSt').onclick=function(){otvor('mriezka');var id=cur>=0?P[cur].id:'';[].forEach.call($('mriezka').querySelectorAll('.chip'),function(c){var p=c.getAttribute('data-p');c.classList.toggle('akt',p===id)})};
 $('mriezka').addEventListener('click',function(e){var c=e.target.closest('.chip');if(c)chod(IDX[c.getAttribute('data-p')])});
 $('nastB').onclick=function(){otvor('nast')};
 $('oApp').onclick=function(){otvor('info')};
 function chyba(){var kde=cur>=0?P[cur].kr:'';location.href='mailto:'+MAIL+'?subject='+encodeURIComponent('Hebrejčina – chyba'+(kde?': '+kde:''))+'&body='+encodeURIComponent('Časť: '+kde+'\nRiadok: \nČo nesedí: \n')}
-$('chybaB').onclick=chyba;
+$('infoMail').onclick=function(e){e.preventDefault();chyba()};
 
 /* ---------- nastavenie: písmo, výslovnosť, noc ---------- */
 var VH=[28,31,34,39,45,52],VP=[13,14,15,16,18,20],VT=[15,16,16,17,18,20];

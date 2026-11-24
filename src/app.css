@@ -182,3 +182,6 @@ strong .he{font-weight:400}
 html.klav :focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .telo .par{margin:20px 0 2px;font-size:14px;font-weight:600;color:var(--mut)}
 .telo .par .he{font-size:1.45em;color:var(--ink)}
+.chip{display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.chip small{font-size:11px;font-weight:500;color:var(--mut);margin-top:2px}
+.chip.akt small{color:var(--goldInk)}

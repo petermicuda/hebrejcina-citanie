@@ -59,12 +59,12 @@ def pridaj(pid, s, grp, tit, kr, desc, he, kon, pill='', ser='', num=None, telo=
     P.append(dict(id=pid, grp=grp, pill=pill, tit=tit, kr=kr, desc=desc, pis='', he=he, kon=kon, ser=ser, num=num))
     OBS[pid] = telo if telo is not None else sek[s][1]
 
-pridaj('prehlad', 's11', 'Opakovanie', 'Prehľad', 'Prehľad', 'Koncové písmená, dageš, podobné písmená', CH, 'Koniec časti')
-pridaj('s3', 's12', 'Opakovanie', 'Strana 3', 'Strana 3', 'Opakovanie písmen a samohlások', CH, 'Koniec strany 3', 's. 3')
-pridaj('s4', 's13', 'Opakovanie', 'Strana 4', 'Strana 4', 'Koncové písmená a dageš', CH, 'Koniec strany 4', 's. 4')
+pridaj('prehlad', 's11', 'Opakovanie', 'Prehľad', 'Prehľad', 'Koncové písmená, dageš, podobné písmená', CH, 'Koniec prehľadu')
+pridaj('s3', 's12', 'Opakovanie', 'Opakovanie 1', 'Opakovanie 1', 'Písmená a samohlásky · cvičebnica s. 3', CH, 'Koniec opakovania 1', '1', 'op', 1)
+pridaj('s4', 's13', 'Opakovanie', 'Opakovanie 2', 'Opakovanie 2', 'Koncové písmená a dageš · cvičebnica s. 4', CH, 'Koniec opakovania 2', '2', 'op', 2)
 b5 = podla_h3(sek['s14'][1])
-pridaj('s5a', 's14', 'Opakovanie · 1 z 2', 'Strana 5', 'Strana 5 · 1/2', 'Podobne znejúce písmená', CH, 'Koniec časti', 's. 5', telo=b5[0])
-pridaj('s5b', 's14', 'Opakovanie · 2 z 2', 'Strana 5', 'Strana 5 · 2/2', 'Podobne vyzerajúce písmená', CH, 'Koniec strany 5', 's. 5', telo=''.join(b5[1:]))
+pridaj('s5a', 's14', 'Opakovanie', 'Opakovanie 3', 'Opakovanie 3', 'Podobne znejúce písmená · cvičebnica s. 5', CH, 'Koniec opakovania 3', '3', 'op', 3, telo=b5[0])
+pridaj('s5b', 's14', 'Opakovanie', 'Opakovanie 4', 'Opakovanie 4', 'Podobne vyzerajúce písmená · cvičebnica s. 5', CH, 'Koniec opakovania 4', '4', 'op', 4, telo=''.join(b5[1:]))
 pridaj('pravidla', 's15', 'Čítanie', 'Pravidlá čítania', 'Pravidlá čítania', 'Ševa, kamac katan, dageš a ďalšie pravidlá', KR, 'Koniec časti')
 
 # Amida po častiach
@@ -86,17 +86,20 @@ for i, (t, d, telo) in enumerate(AMI, 1):
     pridaj(f'amida{i}', 's16', f'Amida · {i} z 5', t, f'Amida {i}/5', d, AM,
            'Koniec Amidy' if i == 5 else f'Koniec časti {i} z 5', telo=telo, ser='am', num=i)
 
-# Big Practice
+# Cvičné čítanie (v cvičebnici „Big Practice“) – číslujeme po poradí, strana cvičebnice je v popise
+STR_CC = {}
 for k in range(17, 26):
     h2, telo = sek[f's{k}']
-    m = re.match(r'(Final )?Big Practice – strana (\d+):\s*(.*)', text(h2))
-    n = int(m.group(2))
-    d = m.group(3)
+    m = re.match(r'(?:Final )?Big Practice – strana (\d+):\s*(.*)', text(h2))
+    n = k - 16
+    strana = int(m.group(1))
+    d = m.group(2)
     d = d[0].upper() + d[1:]
-    if m.group(1):
+    if k == 25:
         d = 'Záverečné cvičenie: ' + d[0].lower() + d[1:]
-    pridaj(f'bp{n}', None, 'Big Practice', f'Strana {n}', f'Strana {n}', d, AM, f'Koniec strany {n}',
-           f's. {n}', 'bp', n, telo=telo)
+    STR_CC[n] = strana
+    pridaj(f'cc{n}', None, 'Cvičné čítanie', f'Cvičné čítanie {n}', f'Cvičné čítanie {n}', d + f' · cvičebnica s. {strana}', AM,
+           f'Koniec cvičenia {n}', str(n), 'cc', n, telo=telo)
 
 pridaj('abeceda', 's26', 'Prehľady', 'Celá abeceda', 'Celá abeceda', 'Písmená, názvy a výslovnosť', AB, 'Koniec časti')
 pridaj('samohlasky', 's27', 'Prehľady', 'Samohlásky', 'Samohlásky', 'Nikud – znamienka pod a nad písmenami', NK, 'Koniec časti')
@@ -125,21 +128,22 @@ def skupina(nazov, pozn, polozky):
 podla = {p['id']: p for p in P}
 G = []
 G.append(skupina('Písmená a samohlásky', 'lekcie 1–11', [pol(podla[f'l{n}'], n) for n in range(1, 12)]))
-G.append(skupina('Opakovanie', 'strany 3–5', [pol(podla['prehlad'], ''), pol(podla['s3'], '3'), pol(podla['s4'], '4'),
-                                           pol(podla['s5a'], '5'), pol(podla['s5b'], '5')]))
+G.append(skupina('Opakovanie', 'cvičebnica s. 3–5', [pol(podla['prehlad'], ''), pol(podla['s3'], '1'), pol(podla['s4'], '2'),
+                                           pol(podla['s5a'], '3'), pol(podla['s5b'], '4')]))
 G.append(skupina('Čítanie', '', [pol(podla['pravidla'], '')] +
                  [pol(podla[f'amida{i}'], f'{i}', sub=nb('Amida · ' + podla[f'amida{i}']['desc'])) for i in range(1, 6)]))
-G.append(skupina('Big Practice', 'strany 8–32', [pol(podla[f'bp{n}'], n) for n in (8, 11, 14, 17, 20, 23, 26, 29, 32)]))
+G.append(skupina('Cvičné čítanie', 'slová a frázy z Amidy', [pol(podla[f'cc{n}'], n) for n in range(1, 10)]))
 G.append(skupina('Prehľady', '', [pol(podla['abeceda'], ''), pol(podla['samohlasky'], '')]))
 OBSAH = ''.join(G)
 
 # ---------- mriežka „Na ktorú časť?“ ----------
-def chip(pid, t, w2=False):
-    return f'<button type="button" class="chip{" w2" if w2 else ""}" data-p="{pid}">{t}</button>'
+def chip(pid, t, w2=False, pod=''):
+    return (f'<button type="button" class="chip{" w2" if w2 else ""}" data-p="{pid}">{t}' +
+            (f'<small>{pod}</small>' if pod else '') + '</button>')
 M = ['<div class="oz">Lekcie<span>písmená a samohlásky</span></div>'] + [chip(f'l{n}', n) for n in range(1, 12)]
-M += ['<div class="oz">Opakovanie<span>strany 3–5</span></div>', chip('prehlad', 'Prehľad', True), chip('s3', '3'), chip('s4', '4'), chip('s5a', '5')]
+M += ['<div class="oz">Opakovanie<span>cvičebnica s. 3–5</span></div>', chip('prehlad', 'Prehľad', True), chip('s3', '1', pod='s. 3'), chip('s4', '2', pod='s. 4'), chip('s5a', '3', pod='s. 5'), chip('s5b', '4', pod='s. 5')]
 M += ['<div class="oz">Čítanie</div>', chip('pravidla', 'Pravidlá', True)] + [chip(f'amida{i}', f'Amida {i}', True) for i in range(1, 6)]
-M += ['<div class="oz">Big Practice<span>strany 8–32</span></div>'] + [chip(f'bp{n}', n) for n in (8, 11, 14, 17, 20, 23, 26, 29, 32)]
+M += ['<div class="oz">Cvičné čítanie<span>slová a frázy z Amidy</span></div>'] + [chip(f'cc{n}', n, pod=f's. {STR_CC[n]}') for n in range(1, 10)]
 M += ['<div class="oz">Prehľady</div>', chip('abeceda', 'Abeceda', True), chip('samohlasky', 'Samohlásky', True)]
 MRIEZKA = ''.join(M)
 
